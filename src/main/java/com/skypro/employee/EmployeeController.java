@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class EmployeeController {
@@ -52,7 +53,7 @@ public class EmployeeController {
         return employeeService.deleteAnEmployee(name, surname);
     }
     @RequestMapping(path = "/findAll")
-    public List<Employee> getEmployees() {
+    public Map<String,String> getEmployees() {
         return employeeService.getAll();
     }
 }
