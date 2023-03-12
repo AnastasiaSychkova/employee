@@ -1,8 +1,11 @@
-package com.skypro.employee;
+package com.skypro.employee.controller;
 
-import Exceptions.EmployeeAlreadyAddedException;
-import Exceptions.EmployeeNotFoundException;
-import Exceptions.EmployeeStorageIsFullException;
+import com.skypro.employee.exceptions.EmployeeAlreadyAddedException;
+import com.skypro.employee.exceptions.EmployeeInvalidDepartmentIdException;
+import com.skypro.employee.exceptions.EmployeeNotFoundException;
+import com.skypro.employee.exceptions.EmployeeStorageIsFullException;
+import com.skypro.employee.service.EmployeeService;
+import com.skypro.employee.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +19,11 @@ public class EmployeeController {
     public String handleException(EmployeeStorageIsFullException e) {
         return String.format("%s %s", HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
-
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(EmployeeInvalidDepartmentIdException.class)
+    public String handleException(EmployeeInvalidDepartmentIdException e) {
+        return String.format("%s %s", HttpStatus.BAD_REQUEST.value(), e.getMessage());
+    }
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(EmployeeAlreadyAddedException.class)
     public String handleException(EmployeeAlreadyAddedException e) {
@@ -38,12 +45,12 @@ public class EmployeeController {
     }
 
     @RequestMapping(path = "/employee/add")
-    public Employee addEmployee(@RequestParam("name") String name, @RequestParam("surname") String surname) {
-        return employeeService.addEmployee(name, surname);
+    public Employee addEmployee(@RequestParam("name") String name, @RequestParam("surname") String surname, @RequestParam("salary") float salary, @RequestParam("departmentId") Integer departmentId) {
+        return employeeService.addEmployee(name, surname, salary, departmentId);
     }
 
     @RequestMapping(path = "/employee/find")
-    public Employee findAnEmployee(@RequestParam("name") String name, @RequestParam("surname") String surname) {
+    public Employee findAnEmployee(@RequestParam("surname") String name, @RequestParam("surname") String surname) {
         return employeeService.findAnEmployee(name, surname);
     }
 
