@@ -1,8 +1,9 @@
-package Service;
+package com.skypro.employee.service;
 
-import Exceptions.EmployeeAlreadyAddedException;
-import Exceptions.EmployeeNotFoundException;
-import Exceptions.EmployeeStorageIsFullException;
+import com.skypro.employee.exceptions.EmployeeAlreadyAddedException;
+import com.skypro.employee.exceptions.EmployeeInvalidDepartmentIdException;
+import com.skypro.employee.exceptions.EmployeeNotFoundException;
+import com.skypro.employee.exceptions.EmployeeStorageIsFullException;
 import com.skypro.employee.Employee;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +32,9 @@ public class EmployeeService {
         }
 
         Employee employee = new Employee(name, surName, salary, departmentId);
-        //if (employee.getDepartmentId() > 5) {
-         //   throw new EmployeeInvalidDepartmentIdException("ID не существует");
-        //}
+        if (employee.getDepartmentId() > 5) {
+            throw new EmployeeInvalidDepartmentIdException("ID не существует");
+        }
 
         if (employees.contains(employee)) {
             throw new EmployeeAlreadyAddedException("В массиве уже есть такой сотрудник");

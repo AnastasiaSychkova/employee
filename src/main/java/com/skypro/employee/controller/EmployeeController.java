@@ -1,10 +1,10 @@
-package Controller;
+package com.skypro.employee.controller;
 
-import Exceptions.EmployeeAlreadyAddedException;
-import Exceptions.EmployeeInvalidDepartmentIdException;
-import Exceptions.EmployeeNotFoundException;
-import Exceptions.EmployeeStorageIsFullException;
-import Service.EmployeeService;
+import com.skypro.employee.exceptions.EmployeeAlreadyAddedException;
+import com.skypro.employee.exceptions.EmployeeInvalidDepartmentIdException;
+import com.skypro.employee.exceptions.EmployeeNotFoundException;
+import com.skypro.employee.exceptions.EmployeeStorageIsFullException;
+import com.skypro.employee.service.EmployeeService;
 import com.skypro.employee.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
